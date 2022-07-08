@@ -7,8 +7,8 @@
 
 #define VPX_CODEC_DISABLE_COMPAT 1
 #pragma warning(push, 0)
-#include <libvpx/vp8dx.h>
-#include <libvpx/vpx_decoder.h>
+#include <vpx/vp8dx.h>
+#include <vpx/vpx_decoder.h>
 #include <libwebm/mkvparser.hpp>
 #include <libwebm/mkvreader.hpp>
 #pragma warning(pop)
@@ -57,7 +57,7 @@ private:
   void codec_error(const std::string& error);
 
   const std::string _path;
-  std::atomic<bool> _success = false;
+  std::atomic<bool> _success = {false};
 
   mkvparser::MkvReader _reader;
   std::unique_ptr<mkvparser::Segment> _segment;

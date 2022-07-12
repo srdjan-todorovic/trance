@@ -285,8 +285,13 @@ VariableConfiguration::VariableConfiguration(trance_pb::System& system,
 {
   std::unordered_map<std::string, std::string> last_variables;
   auto it = system.last_session_map().find(session_path);
-  if (it != system.last_session_map().end()) {
-    last_variables.insert(it->second.variable_map().begin(), it->second.variable_map().end());
+  if (it != system.last_session_map().end())
+  {
+    auto variableMap = it->second.variable_map();
+    for (auto itVM = variableMap.begin(), end = variableMap.end(); itVM != end; ++it)
+    {
+      last_variables.insert(*itVM);
+    }
   }
 
   if (!session.variable_map().empty()) {

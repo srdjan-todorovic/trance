@@ -114,7 +114,7 @@ public:
 
     Bind(wxEVT_LIST_ITEM_SELECTED,
          [&](wxListEvent& e) {
-           std::string text = _list->GetItemText(e.GetIndex());
+           std::string text = _list->GetItemText(e.GetIndex()).ToStdString();
            SetSelection(text);
          },
          wxID_ANY);
@@ -126,7 +126,7 @@ public:
            }
            e.Veto();
            std::string old_name = _selection;
-           std::string new_name = e.GetLabel();
+           std::string new_name = e.GetLabel().ToStdString();
            if (new_name.empty()) {
              return;
            }

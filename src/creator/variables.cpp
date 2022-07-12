@@ -123,7 +123,7 @@ VariablePage::VariablePage(wxNotebook* parent, CreatorFrame& creator_frame,
                       }
                       e.Veto();
                       std::string old_name = _current_value;
-                      std::string new_name = e.GetLabel();
+                      std::string new_name = e.GetLabel().ToStdString();
                       if (new_name.empty()) {
                         return;
                       }

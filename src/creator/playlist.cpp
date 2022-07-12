@@ -370,7 +370,7 @@ void PlaylistPage::AddSubroutineItem(const std::string& playlist_item_name)
     if (it == _session.mutable_playlist()->end()) {
       return;
     }
-    std::string name = choice->GetString(choice->GetSelection());
+    std::string name = choice->GetString(choice->GetSelection()).ToStdString();
     if (name != "") {
       while (it->second.subroutine().playlist_item_name_size() <= int(index)) {
         it->second.mutable_subroutine()->add_playlist_item_name(name);
@@ -489,7 +489,7 @@ void PlaylistPage::AddNextItem(const std::string& name, std::uint32_t weight_val
     if (it == _session.mutable_playlist()->end()) {
       return;
     }
-    std::string name = choice->GetString(choice->GetSelection());
+    std::string name = choice->GetString(choice->GetSelection()).ToStdString();
     if (name != "") {
       while (it->second.next_item_size() <= int(index)) {
         it->second.add_next_item()->set_random_weight(1);
@@ -520,7 +520,7 @@ void PlaylistPage::AddNextItem(const std::string& name, std::uint32_t weight_val
       item.clear_condition_variable_name();
       item.clear_condition_variable_value();
     } else {
-      std::string name = variable_choice->GetString(variable_choice->GetSelection());
+      std::string name = variable_choice->GetString(variable_choice->GetSelection()).ToStdString();
       item.set_condition_variable_name(name);
       auto variable_it = _session.variable_map().find(name);
       item.set_condition_variable_value(variable_it->second.default_value());
@@ -536,7 +536,7 @@ void PlaylistPage::AddNextItem(const std::string& name, std::uint32_t weight_val
           return;
         }
         auto& item = *it->second.mutable_next_item(int(index));
-        std::string value = variable_value_choice->GetString(variable_value_choice->GetSelection());
+        std::string value = variable_value_choice->GetString(variable_value_choice->GetSelection()).ToStdString();
         item.set_condition_variable_value(value);
         _creator_frame.MakeDirty(true);
       });

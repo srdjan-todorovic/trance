@@ -28,9 +28,9 @@ namespace
 
   void c2v(const trance_pb::Colour& c, wxColourPickerCtrl* colour, wxSpinCtrl* alpha)
   {
-    colour->SetColour(wxColour{unsigned char(255 * c.r()), unsigned char(255 * c.g()),
-                               unsigned char(255 * c.b()), unsigned char(alpha->GetValue())});
-    alpha->SetValue(unsigned char(255 * c.a()));
+    colour->SetColour(wxColour{(unsigned char)(255 * c.r()), (unsigned char)(255 * c.g()),
+                               (unsigned char)(255 * c.b()), (unsigned char)(alpha->GetValue())});
+    alpha->SetValue((unsigned char)(255 * c.a()));
   }
 
   trance_pb::Colour v2c(wxColourPickerCtrl* colour, wxSpinCtrl* alpha)
@@ -139,7 +139,7 @@ ProgramPage::ProgramPage(wxNotebook* parent, CreatorFrame& creator_frame,
     leftright->Add(row_sizer, 0, wxEXPAND);
     _visual_lookup[type] = weight;
 
-    weight->Bind(wxEVT_SPINCTRL, [&this, weight, type](wxCommandEvent & e) {
+    weight->Bind(wxEVT_SPINCTRL, [this, weight, type](wxCommandEvent & e) {
       auto it = _session.mutable_program_map()->find(_item_selected);
       if (it == _session.mutable_program_map()->end()) {
         return;
